@@ -136,8 +136,8 @@ func CreateLatestService(logger *logging.BaseLogger, clients *Clients, names Res
 
 // CreateLatestServiceWithResources creates a service in namespace with the name names.Service
 // that uses the image specified by imagePath
-func CreateLatestServiceWithResources(logger *logging.BaseLogger, clients *Clients, names ResourceNames, imagePath string) (*v1alpha1.Service, error) {
-	service := LatestServiceWithResources(ServingNamespace, names, imagePath)
+func CreateLatestServiceWithResources(logger *logging.BaseLogger, clients *Clients, names ResourceNames) (*v1alpha1.Service, error) {
+	service := LatestServiceWithResources(ServingNamespace, names, ImagePath(names.Image))
 	LogResourceObject(logger, ResourceObjects{Service: service})
 	return clients.ServingClient.Services.Create(service)
 }
